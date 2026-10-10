@@ -88,4 +88,31 @@
     display: block;
     overflow-x: auto;
   }
+
+  /* Status progress bars (Overview: memory / swap / CPU load).
+     The generic horizontal-scroll table rule above collapses these
+     two-column rows, shrinking the bar until the title text wraps and
+     gets clipped by the 22px fixed height. Lay the row out as flex so
+     the bar fills the remaining width and the text stays on one line. */
+  .table .tr:has(.cbi-progressbar) {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+
+    .td,
+    td {
+      width: auto !important;
+      border-bottom: none;
+    }
+
+    .td:last-child,
+    td:last-child {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+  }
+
+  .cbi-progressbar {
+    min-width: 120px;
+  }
 }

@@ -1742,6 +1742,8 @@ table.cbi-section-table .tr:hover .td {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 var(--space-sm);
+  white-space: nowrap;
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text);
@@ -2136,6 +2138,29 @@ body.modal-overlay-active #modal_overlay {
   .table {
     display: block;
     overflow-x: auto;
+  }
+  /* Status progress bars (Overview: memory / swap / CPU load).
+     The generic horizontal-scroll table rule above collapses these
+     two-column rows, shrinking the bar until the title text wraps and
+     gets clipped by the 22px fixed height. Lay the row out as flex so
+     the bar fills the remaining width and the text stays on one line. */
+  .table .tr:has(.cbi-progressbar) {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+  .table .tr:has(.cbi-progressbar) .td,
+  .table .tr:has(.cbi-progressbar) td {
+    width: auto !important;
+    border-bottom: none;
+  }
+  .table .tr:has(.cbi-progressbar) .td:last-child,
+  .table .tr:has(.cbi-progressbar) td:last-child {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .cbi-progressbar {
+    min-width: 120px;
   }
 }
 /* ==========================================================================

@@ -17,6 +17,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Compile LESS to CSS
+        run: |
+          npm install -g less
+          lessc less/cascade.less htdocs/luci-static/glass/css/cascade.css
+          lessc less/dark.less htdocs/luci-static/glass/css/dark.css
+
       - name: Build packages
         run: |
           rm -f dist/*
