@@ -57,13 +57,20 @@ jobs:
 
           gzip -k Packages
 
-          # Sign with usign key (signify-openbsd is compatible)
-          # opkg verifies sig against the uncompressed Packages file saved to /var/opkg-lists/
-          sudo apt-get install -y -qq signify-openbsd >/dev/null 2>&1
+          # Sign with usign key (signify-openbsd is compatible) only when a
+          # valid secret key is configured. A usign/signify secret key file
+          # must begin with an "untrusted comment: " line. If the secret is
+          # absent or malformed, skip signing instead of failing the release;
+          # the unsigned index + packages are still published.
           echo "$USIGN_SEC_KEY" > _tmp/glass.sec
-          signify-openbsd -S -s _tmp/glass.sec -m Packages -x Packages.sig
-          echo "Packages signed successfully"
-          cat Packages.sig
+          if [ -s _tmp/glass.sec ] && head -n1 _tmp/glass.sec | grep -q '^untrusted comment: '; then
+            sudo apt-get install -y -qq signify-openbsd >/dev/null 2>&1
+            signify-openbsd -S -s _tmp/glass.sec -m Packages -x Packages.sig
+            echo "Packages signed successfully"
+            cat Packages.sig
+          else
+            echo "::warning::USIGN_SEC_KEY missing or not a valid usign secret key (first line must be 'untrusted comment: '); skipping opkg index signing."
+          fi
 
           rm -rf _tmp
 
@@ -72,6 +79,14 @@ jobs:
           APK_SEC_KEY: ${{ secrets.APK_SEC_KEY }}
         run: |
           APK="${{ steps.version.outputs.apk }}"
+          if [ -z "$APK_SEC_KEY" ]; then
+            echo "::warning::APK_SEC_KEY not set; skipping signed apk packages.adb index. The .apk is still built and released."
+            exit 0
+          fi
+          if ! command -v docker >/dev/null 2>&1; then
+            echo "::warning::docker not available; skipping apk packages.adb index."
+            exit 0
+          fi
           mkdir -p dist/apk_staging
           cp "dist/$APK" dist/apk_staging/
 
@@ -96,6 +111,7 @@ jobs:
           ls -la dist/apk_staging/
 
       - name: Deploy package repo to gh-pages
+        continue-on-error: true
         run: |
           VER="${{ steps.version.outputs.version }}"
           IPK="${{ steps.version.outputs.ipk }}"
@@ -117,7 +133,7 @@ jobs:
           cp "/tmp/dist-save/$IPK" packages/
           cp /tmp/dist-save/Packages packages/
           cp /tmp/dist-save/Packages.gz packages/
-          cp /tmp/dist-save/Packages.sig packages/
+          cp /tmp/dist-save/Packages.sig packages/ 2>/dev/null || true
           # Remove old versions
           find packages -name '*.ipk' ! -name "$IPK" -delete
 
@@ -144,14 +160,17 @@ jobs:
           git push origin gh-pages
 
       - name: Deploy to GitHub Pages
+        continue-on-error: true
         uses: actions/configure-pages@v5
 
       - name: Upload Pages artifact
+        continue-on-error: true
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
 
       - name: Deploy Pages
+        continue-on-error: true
         uses: actions/deploy-pages@v4
 
       - name: Create or update GitHub Release
@@ -159,8 +178,10 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           VER="${{ steps.version.outputs.version }}"
-          IPK="/tmp/dist-save/${{ steps.version.outputs.ipk }}"
-          APK="/tmp/dist-save/${{ steps.version.outputs.apk }}"
+          SRC=/tmp/dist-save
+          [ -d "$SRC" ] || SRC=dist
+          IPK="$SRC/${{ steps.version.outputs.ipk }}"
+          APK="$SRC/${{ steps.version.outputs.apk }}"
 
           # Check if release already exists (preserve manually edited notes)
           if gh release view "v${VER}" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
