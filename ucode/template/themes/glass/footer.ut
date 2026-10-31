@@ -1,13 +1,7 @@
 {# luci-theme-glass — Main page footer template #}
 {%
-  import { readfile, access } from 'fs';
-  import { cursor } from 'uci';
+  import { readfile } from 'fs';
   const glass_version = trim(readfile('/usr/share/ucode/luci/template/themes/glass/version')) ?? '?';
-  let glass_status_bar = '1';
-  let _cfg = cursor();
-  if (access('/etc/config/glass')) {
-    glass_status_bar = _cfg.get_first('glass', 'global', 'status_bar') ?? '1';
-  }
 %}
 {% if (!blank_page): %}
     </div>
@@ -25,9 +19,6 @@
 <script src="{{ resource }}/luci.js"></script>
 <script>
   L.require('menu-glass');
-{% if (glass_status_bar == '1'): %}
-  L.require('status-glass');
-{% endif %}
 
   if (history.scrollRestoration) history.scrollRestoration = 'manual';
 

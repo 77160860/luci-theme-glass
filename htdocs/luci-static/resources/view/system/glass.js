@@ -127,11 +127,6 @@ return view.extend({
 		o.value('dark', _('Dark'));
 		o.default = 'normal';
 
-		o = s.option(form.Flag, 'status_bar', _('Header status bar'),
-			_('Show live system stats (CPU, RAM, network, uptime) in the header. Disable to reduce resource usage on low-end devices.'));
-		o.default = '1';
-		o.rmempty = false;
-
 		o = s.option(form.ListValue, 'font_size', _('Base font size'),
 			_('Scales all text in the theme. Larger values improve readability on high-DPI displays.'));
 		o.value('13', _('Small (13px)'));

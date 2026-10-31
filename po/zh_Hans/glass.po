@@ -110,10 +110,6 @@ msgstr "前往密码配置..."
 msgid "Grant access for luci-theme-glass"
 msgstr "授予 luci-theme-glass 访问权限"
 
-#: htdocs/luci-static/resources/view/system/glass.js:38
-msgid "Header status bar"
-msgstr "顶栏状态条"
-
 #: ucode/template/themes/glass/sysauth.ut:111
 msgid "Invalid username and/or password! Please try again."
 msgstr "用户名或密码错误，请重试。"
@@ -339,12 +335,6 @@ msgid ""
 "Scales all text in the theme. Larger values improve readability on high-DPI "
 "displays."
 msgstr "缩放主题内所有文字，较大值可提升高分辨率屏幕的可读性。"
-
-#: htdocs/luci-static/resources/view/system/glass.js:39
-msgid ""
-"Show live system stats (CPU, RAM, network, uptime) in the header. Disable to "
-"reduce resource usage on low-end devices."
-msgstr "在顶栏显示实时系统状态（CPU、内存、网络、运行时间），低性能设备可关闭以降低资源占用。"
 
 #: ucode/template/themes/glass/sysauth.ut:106
 msgid "Sign in to continue"

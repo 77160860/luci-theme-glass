@@ -110,10 +110,6 @@ msgstr "Ir para configuração de senha..."
 msgid "Grant access for luci-theme-glass"
 msgstr "Conceder acesso ao luci-theme-glass"
 
-#: htdocs/luci-static/resources/view/system/glass.js:38
-msgid "Header status bar"
-msgstr "Barra de status do cabeçalho"
-
 #: ucode/template/themes/glass/sysauth.ut:111
 msgid "Invalid username and/or password! Please try again."
 msgstr "Nome de usuário e/ou senha inválidos! Tente novamente."
@@ -176,12 +172,6 @@ msgid ""
 "Scales all text in the theme. Larger values improve readability on high-DPI "
 "displays."
 msgstr "Redimensiona todo o texto do tema. Valores maiores melhoram a legibilidade em telas de alta resolução."
-
-#: htdocs/luci-static/resources/view/system/glass.js:39
-msgid ""
-"Show live system stats (CPU, RAM, network, uptime) in the header. Disable to "
-"reduce resource usage on low-end devices."
-msgstr "Exiba estatísticas do sistema em tempo real (CPU, RAM, rede, uptime) no cabeçalho. Desative para reduzir o uso de recursos em dispositivos de baixo desempenho."
 
 #: ucode/template/themes/glass/sysauth.ut:106
 msgid "Sign in to continue"

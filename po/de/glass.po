@@ -110,10 +110,6 @@ msgstr "Zur Passwortkonfiguration..."
 msgid "Grant access for luci-theme-glass"
 msgstr "Zugriff für luci-theme-glass gewähren"
 
-#: htdocs/luci-static/resources/view/system/glass.js:38
-msgid "Header status bar"
-msgstr "Statusleiste im Header"
-
 #: ucode/template/themes/glass/sysauth.ut:111
 msgid "Invalid username and/or password! Please try again."
 msgstr "Ungültiger Benutzername oder falsches Passwort! Bitte erneut versuchen."
@@ -176,12 +172,6 @@ msgid ""
 "Scales all text in the theme. Larger values improve readability on high-DPI "
 "displays."
 msgstr "Skaliert den gesamten Text des Themes. Höhere Werte verbessern die Lesbarkeit auf HiDPI-Displays."
-
-#: htdocs/luci-static/resources/view/system/glass.js:39
-msgid ""
-"Show live system stats (CPU, RAM, network, uptime) in the header. Disable to "
-"reduce resource usage on low-end devices."
-msgstr "Live-Systemstatistiken (CPU, RAM, Netzwerk, Betriebszeit) im Header anzeigen. Deaktivieren, um die Ressourcennutzung auf schwachen Geräten zu reduzieren."
 
 #: ucode/template/themes/glass/sysauth.ut:106
 msgid "Sign in to continue"

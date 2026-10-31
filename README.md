@@ -6,7 +6,7 @@ A glassmorphism theme for OpenWrt LuCI, inspired by Apple's visionOS and macOS. 
 
 ![License](https://img.shields.io/badge/license-GPL--3.0%20%2F%20Commercial-blue.svg)
 ![OpenWrt](https://img.shields.io/badge/OpenWrt-23.05%2B-brightgreen.svg)
-![Version](https://img.shields.io/badge/version-1.1.6-orange.svg)
+![Version](https://img.shields.io/badge/version-1.1.8-orange.svg)
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-support-yellow?style=flat&logo=buy-me-a-coffee)](https://buymeacoffee.com/rchen14b)
 
 ## Screenshots
@@ -32,8 +32,7 @@ A glassmorphism theme for OpenWrt LuCI, inspired by Apple's visionOS and macOS. 
 - **Glassmorphism everywhere** — `backdrop-filter: blur() saturate()` with multi-stop gradients, translucent backgrounds, 0.5px glass borders, and inset glow highlights on all panels
 - **Glass buttons** — Neutral buttons are translucent glass, primary buttons are blue-tinted, danger buttons are red-tinted. No solid-color buttons
 - **Frosted sidebar** — Fixed sidebar with 30px blur and inset light diffusion
-- **Glass header** — Top nav bar with glass pill badges for page title and status indicators
-- **Live status indicators** — CPU load, RAM %, uptime, and WAN throughput in the header bar. Auto-detects WAN interface, resolves bridges, handles DSA hardware offloading. MikroTik-style speed formatting. Color-coded levels and detailed tooltips
+- **Glass header** — Top nav bar with glass pill badges for page title
 - **Glass login card** — Frosted login page with translucent inputs
 
 ### Theming
@@ -179,8 +178,7 @@ luci-theme-glass/
 │   │   ├── img/                          # Logo and icons
 │   │   └── background/                   # User wallpapers (bg.jpg, etc.)
 │   └── resources/
-│       ├── menu-glass.js                 # Client-side menu renderer
-│       └── status-glass.js               # Header status indicators (CPU, RAM, net, uptime)
+│       └── menu-glass.js                 # Client-side menu renderer
 ├── less/                                 # LESS source
 │   ├── cascade.less                      # Master import file
 │   ├── variables.less                    # Design tokens (CSS custom properties)
